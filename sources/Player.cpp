@@ -198,4 +198,9 @@ namespace pandemic {
     {
         // function for Medic
     }
+
+    City Player::get_location() const
+    {
+        return location;
+    }
 }

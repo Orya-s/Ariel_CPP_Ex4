@@ -69,16 +69,19 @@ namespace pandemic {
         public:
             Color color;  // public because doesn't change between games
             std::vector<City> neighbors;
-        
+            std::string name;
 
             City_info(Color c, std::vector<City> n) : color(c) , neighbors(n), research_station(false), pandemic_level(0) {}
+            City_info(Color c, std::vector<City> n, std::string name) : 
+                color(c) , neighbors(n), research_station(false), pandemic_level(0), name(name) {}
+
             ~City_info() {}
 
-            int& get_cubes()
+            int& get_cubes() 
             {
                 return pandemic_level;
             }
-            bool has_station()
+            const bool has_station() const
             {
                 return research_station;
             }
@@ -86,9 +89,15 @@ namespace pandemic {
             {
                 research_station = true;
             }
-            void remove_station()
+            void remove_station() 
             {
                 research_station = false;
+            }
+            friend std::ostream& operator<< (std::ostream& os, const City_info& city)
+            {
+                return os << "\e[1m" << city.name << "\e[0m"<< "  "   
+                    << " disease cubes - " <<  "\033[1;36m" << city.pandemic_level << "\033[0m"
+                    << " , research station - " << "\033[1;36m" << city.has_station() << "\033[0m";
             }
 
     };

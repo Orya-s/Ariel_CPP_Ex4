@@ -32,5 +32,6 @@ namespace pandemic {
             virtual Player& take_card(City city) ;
             virtual void remove_cards();
             virtual void enter_city(City city);
+            virtual City get_location() const;
     };
 }
